@@ -1,12 +1,13 @@
 ## EventCraft
 
-EventCraft is a web application designed to display local events in a responsive, visually appealing format with clean animations and a modern UI. Users can explore various events, with sections for featured and trending events, and filter events based on categories like location and genre. The project implements JWT for secure authorization and Role-Based Access Control (RBAC) for granted access based on their roles.
+EventCraft is a web application designed to display local events in a responsive, visually appealing format with clean animations and a modern UI. Users can explore and book various events, with sections for featured and trending events, and filter events based on categories like location and genre. The project implements JWT for secure authorization and Role-Based Access Control (RBAC) for granted access based on their roles.
 
 ### Features
 
 - User Authentication: Secure registration and login for users using JWT.
 - Dashboard Management: Manage listed events, edit details, or remove listings from the dashboard according to RBAC.
 - Event Sections: Events categorized into different sections for quick browsing.
+- Payment Integration: Smooth and easy payment process for booking various events.
 - Image Uploads: Upload multiple images for each event, with integration to Cloudinary for secure storage.
 - Filtering Options: Live filtering options based on categories like genre and location.
 - Responsive Design: Fully responsive design that works on all devices and screen sizes.
@@ -18,6 +19,7 @@ EventCraft is a web application designed to display local events in a responsive
 - [Node.js](https://nodejs.org/en/download) installed
 - [MongoDB](https://www.mongodb.com/try/download) installed 
 - An account on [Cloudinary](https://cloudinary.com)
+- Test API keys on [Razorpay](https://dashboard.razorpay.com/app/website-app-settings/api-keys)
 
 ### Tech Stack
 
@@ -96,6 +98,9 @@ REFRESH_TOKEN_EXPIRY=10d                          # Refresh token expiry time
 CLOUDINARY_CLOUD_NAME=your_cloudinary_name        # Cloudinary cloud name
 CLOUDINARY_CLOUD_KEY=your_cloudinary_key          # Cloudinary API key
 CLOUDINARY_CLOUD_SECRET=your_cloudinary_secret    # Cloudinary API secret
+
+RAZORPAY_KEY_ID=your_api_key                      # Razorpay API Key ID
+RAZORPAY_KEY_SECRET=your_api_secret               # Razorpay API Secret Key
 ```
 
 - PORT: The port on which the backend server will run.
@@ -107,6 +112,8 @@ CLOUDINARY_CLOUD_SECRET=your_cloudinary_secret    # Cloudinary API secret
 - CLOUDINARY_CLOUD_NAME: Your Cloudinary cloud name for image storage.
 - CLOUDINARY_CLOUD_KEY: Your Cloudinary API key.
 - CLOUDINARY_CLOUD_SECRET: Your Cloudinary API secret.
+- RAZORPAY_KEY_ID=Your Razorpay API Key ID
+- RAZORPAY_KEY_SECRET=Your Razorpay API Secret Key
 
 Similarly, create a .env file inside the frontend directory with the following variable:
 
