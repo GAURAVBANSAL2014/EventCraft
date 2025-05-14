@@ -1,0 +1,12 @@
+# Ignore node_modules directories
+**/node_modules/
+
+# Ignore .env files
+**/.env
+
+# Other files
+.gitattributes
+.DS_Store
+
+# Respective gitignore files of backend and frontend
+**/.gitignore
