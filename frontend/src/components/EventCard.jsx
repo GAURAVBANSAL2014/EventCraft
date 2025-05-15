@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { FaCalendarAlt, FaMapMarkerAlt } from 'react-icons/fa';
 
 const EventCard = ({ event, handleViewDetails }) => {
-  const { name, date, location, category, images, price } = event;
+  const { name, date, location, category, images, price, description, time, organizerId, _id } = event;
 
   const navigate = useNavigate();
   return (
