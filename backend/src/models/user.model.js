@@ -37,11 +37,19 @@ const userSchema = new Schema(
     },
     bookedEvents: [
       {
+        _id: mongoose.Schema.Types.ObjectId,
         name: String,
         category: String,
         date: String,
         location: String,
-        image: String,
+        images: [String],
+        time: String,
+        description: String,
+        price: String,
+        organizerId: {
+          type: mongoose.Schema.Types.ObjectId,
+          ref: "User",
+        },
         tickets: Number,
         bookedAt: {
           type: Date,
