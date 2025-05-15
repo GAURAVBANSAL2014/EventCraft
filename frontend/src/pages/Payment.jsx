@@ -10,7 +10,7 @@ import { Link, useNavigate } from 'react-router-dom';
 const Payment = () => {
     const { state } = useLocation();
     const { event } = state || {};
-    const { name: eventName, date: eventDate, location, images, category, price } = event || {};
+    const { name: eventName, date: eventDate, location, images, category, price, description, time: eventTime, organizerId, _id } = event || {};
 
     const [user, setUser] = useState([]);
     const [loading, setLoading] = useState(true);
@@ -82,7 +82,7 @@ const Payment = () => {
             },
             body: JSON.stringify({
                 amount: totalPrice, email: user.email, name: user.name, contact: user.contact, address: address,
-                event: { name: eventName, category, date: eventDate, location, images }, tickets: ticketCount
+                event: { name: eventName, category, date: eventDate, price, location, images, time: eventTime, description, organizerId, eventId: _id }, tickets: ticketCount
             }),
             credentials: 'include',
         })
