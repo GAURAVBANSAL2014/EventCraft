@@ -42,11 +42,16 @@ const createPayment = async (req, res) => {
     if (!user) throw new ApiError(404, "User not found");
 
     user.bookedEvents.push({
+      _id: event.eventId,
       name: event.name,
       category: event.category,
       date: event.date,
       location: event.location,
-      image: event.images[0],
+      images: event.images,
+      time: event.time,
+      description: event.description,
+      organizerId: event.organizerId,
+      price: event.price,
       tickets: tickets,
     });
 
