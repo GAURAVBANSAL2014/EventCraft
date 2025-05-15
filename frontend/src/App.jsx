@@ -8,6 +8,7 @@ import PrivacyPolicy from './pages/PrivacyPolicy';
 import RefundPolicy from './pages/RefundPolicy';
 import Contact from './pages/Contact';
 import Payment from './pages/Payment';
+import BookedEvents from './pages/BookedEvents';
 import { Routes, Route, useNavigate } from 'react-router-dom';
 
 
@@ -35,6 +36,7 @@ function App() {
         <Route path="/refund" element={<RefundPolicy />} />
         <Route path="/contact" element={<Contact />} />
         <Route path="/payment" element={<Payment />} />
+        <Route path="/booked-events" element={<BookedEvents />} />
       </Routes>
     </div>
 
