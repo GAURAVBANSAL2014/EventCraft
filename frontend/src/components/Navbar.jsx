@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { FaSearch, FaSignOutAlt} from 'react-icons/fa';
+import { FaSearch, FaSignOutAlt } from 'react-icons/fa';
+import { MdEventNote } from "react-icons/md";
 import logo from '/assets/logo.png';
 import API_BASE_URL from '../../ApiBaseURL';
 import Cookies from 'js-cookie';
@@ -16,7 +17,7 @@ const Navbar = ({ setSearchTerm }) => {
   const handleLogout = async () => {
     try {
       const response = await fetch(`${API_BASE_URL}auth/logout`, {
-        headers: {Authorization: `Bearer ${Cookies.get("accessToken")}`},
+        headers: { Authorization: `Bearer ${Cookies.get("accessToken")}` },
         method: 'POST',
         credentials: 'include',
       });
@@ -72,11 +73,19 @@ const Navbar = ({ setSearchTerm }) => {
         </div>
         <button
           onClick={handleLogout}
-          className="flex items-center bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded-full transition ml-4"
+          className="flex items-center bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded-full transition md:ml-4"
         >
-          <FaSignOutAlt className="mr-2" />
-          Logout
+          <FaSignOutAlt className="md:mr-2" />
+          <span className='md:block hidden'>Logout</span>
         </button>
+        <Link to="/booked-events">
+          <button
+            className="flex items-center bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded-full transition md:ml-4 ml-2"
+          >
+            <MdEventNote className="md:mr-2" />
+           <span className='md:block hidden'>My Events</span>
+          </button>
+        </Link>
       </div>
     </nav>
   );
