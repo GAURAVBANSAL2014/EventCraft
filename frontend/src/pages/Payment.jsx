@@ -5,15 +5,17 @@ import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
 import API_BASE_URL from '../../ApiBaseURL';
 import Cookies from "js-cookie";
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 const Payment = () => {
     const { state } = useLocation();
     const { event } = state || {};
-    const { name: eventName, category, price } = event || {};
+    const { name: eventName, date: eventDate, location, images, category, price } = event || {};
 
     const [user, setUser] = useState([]);
     const [loading, setLoading] = useState(true);
+
+    const navigate = useNavigate();
 
     const fetchCurrentUser = async () => {
         setLoading(true);
@@ -78,7 +80,10 @@ const Payment = () => {
                 'Content-Type': 'application/json',
                 Authorization: `Bearer ${Cookies.get("accessToken")}`,
             },
-            body: JSON.stringify({ amount: totalPrice, email: user.email, name: user.name, contact: user.contact, address: address }),
+            body: JSON.stringify({
+                amount: totalPrice, email: user.email, name: user.name, contact: user.contact, address: address,
+                event: { name: eventName, category, date: eventDate, location, images }, tickets: ticketCount
+            }),
             credentials: 'include',
         })
             .then(response => response.json())
@@ -96,6 +101,7 @@ const Payment = () => {
                     handler: function (response) {
                         alert('Payment successful!');
                         console.log('Razorpay response:', response);
+                        navigate("/home");
                     },
                     prefill: {
                         name: user.name,
@@ -206,8 +212,7 @@ const Payment = () => {
                                     onChange={() => setAgreed(!agreed)}
                                     className="mr-2"
                                 />
-                                <pre>I have read and accepted the </pre> {' '}
-                                <Link to="/terms"><pre><a className="text-blue-500 underline cursor-pointer">terms and conditions</a></pre></Link>
+                                <p>I have read and accepted the<Link to="/terms" className='text-blue-500 underline ml-1'>terms and conditions</Link></p>
                             </label>
                         </div>
 
