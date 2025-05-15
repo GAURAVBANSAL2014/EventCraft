@@ -35,6 +35,20 @@ const userSchema = new Schema(
       enum: ["Admin", "Event Organizer", "User"],
       default: "User", // Default role
     },
+    bookedEvents: [
+      {
+        name: String,
+        category: String,
+        date: String,
+        location: String,
+        image: String,
+        tickets: Number,
+        bookedAt: {
+          type: Date,
+          default: Date.now,
+        },
+      },
+    ],
   },
   { timestamps: true }
 );
