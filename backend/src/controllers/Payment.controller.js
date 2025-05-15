@@ -4,6 +4,7 @@ const Razorpay = require('razorpay');
 import { Payment } from '../models/payment.model.js';
 import { ApiResponse } from "../utils/ApiResponse.js";
 import { ApiError } from "../utils/ApiError.js";
+import { User } from "../models/user.model.js";
 
 const razorpay = new Razorpay({
   key_id: process.env.RAZORPAY_KEY_ID,
@@ -12,7 +13,7 @@ const razorpay = new Razorpay({
 
 const createPayment = async (req, res) => {
 
-  const { amount, email, name, contact, address } = req.body;
+  const { amount, email, name, contact, address, event, tickets } = req.body;
 
   try {
     const options = {
@@ -36,6 +37,20 @@ const createPayment = async (req, res) => {
     });
 
     const savedPayment = await createdPayment.save();
+
+    const user = await User.findOne({ email });
+    if (!user) throw new ApiError(404, "User not found");
+
+    user.bookedEvents.push({
+      name: event.name,
+      category: event.category,
+      date: event.date,
+      location: event.location,
+      image: event.images[0],
+      tickets: tickets,
+    });
+
+    await user.save();
 
     return res.status(201).json(new ApiResponse(201, savedPayment, "Payment created successfully."));
   } catch (error) {
